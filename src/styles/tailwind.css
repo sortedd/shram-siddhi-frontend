@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core System Colors */
+    --color-background: #F8FAFC; /* slate-50 */
+    --color-foreground: #1F2937; /* gray-800 */
+    --color-border: rgba(0, 0, 0, 0.05); /* transparent black */
+    --color-input: #FFFFFF; /* white */
+    --color-ring: #6366F1; /* indigo-500 */
+    
+    /* Card & Surface Colors */
+    --color-card: #FFFFFF; /* white */
+    --color-card-foreground: #1F2937; /* gray-800 */
+    --color-popover: #FFFFFF; /* white */
+    --color-popover-foreground: #1F2937; /* gray-800 */
+    --color-surface: #E0E0E0; /* gray-300 */
+    --color-surface-foreground: #1F2937; /* gray-800 */
+    
+    /* Muted Colors */
+    --color-muted: #F3F4F6; /* gray-100 */
+    --color-muted-foreground: #6B7280; /* gray-500 */
+    
+    /* Primary Brand Colors */
+    --color-primary: #6366F1; /* indigo-500 */
+    --color-primary-foreground: #FFFFFF; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #8B5CF6; /* violet-500 */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #F59E0B; /* amber-500 */
+    --color-accent-foreground: #FFFFFF; /* white */
+    
+    /* State Colors */
+    --color-success: #10B981; /* emerald-500 */
+    --color-success-foreground: #FFFFFF; /* white */
+    --color-warning: #F59E0B; /* amber-500 */
+    --color-warning-foreground: #FFFFFF; /* white */
+    --color-error: #EF4444; /* red-500 */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #EF4444; /* red-500 */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Neumorphic Shadow Variables */
+    --shadow-neumorphic-sm: inset 2px 2px 4px rgba(0,0,0,0.1), inset -2px -2px 4px rgba(255,255,255,0.8);
+    --shadow-neumorphic-md: 2px 2px 8px rgba(0,0,0,0.1), -2px -2px 8px rgba(255,255,255,0.8);
+    --shadow-neumorphic-lg: 4px 4px 16px rgba(0,0,0,0.1), -4px -4px 16px rgba(255,255,255,0.8);
+    --shadow-neumorphic-pressed: inset 4px 4px 8px rgba(0,0,0,0.15), inset -4px -4px 8px rgba(255,255,255,0.9);
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-caption {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Neumorphic Button Styles */
+  .btn-neumorphic {
+    @apply bg-surface text-surface-foreground;
+    box-shadow: var(--shadow-neumorphic-md);
+    transition: all 150ms ease-out;
+  }
+  
+  .btn-neumorphic:hover {
+    transform: translateY(-1px);
+  }
+  
+  .btn-neumorphic:active {
+    transform: scale(0.98);
+    box-shadow: var(--shadow-neumorphic-pressed);
+  }
+  
+  /* Neumorphic Card Styles */
+  .card-neumorphic {
+    @apply bg-surface;
+    box-shadow: var(--shadow-neumorphic-lg);
+    border-radius: 12px;
+  }
+  
+  /* Touch Target Standards */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px] p-2;
+  }
+  
+  /* Loading Animation */
+  .pulse-loading {
+    animation: pulse-opacity 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-opacity {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1.0; }
+  }
+  
+  /* Micro-interaction Transforms */
+  .scale-press {
+    transition: transform 150ms ease-out;
+  }
+  
+  .scale-press:active {
+    transform: scale(0.98);
+  }
+}
