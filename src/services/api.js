@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// API base configuration - Added /api prefix for backend routes
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || import.meta.env.REACT_APP_API_BASE_URL || 'http://localhost:3001') + '/api';
+// API base configuration - Removed /api prefix since our backend routes don't include it
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
 
 // Create axios instance
 const api = axios.create({
@@ -17,7 +17,7 @@ api.interceptors.request.use(
   (config) => {
     const token = sessionStorage.getItem('auth-token');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = Bearer ;
     }
     return config;
   },
@@ -43,11 +43,11 @@ api.interceptors.response.use(
 // API service methods
 export const apiService = {
   // Health check
-  health: () => api.get('/health'),
+  health: () => api.get('/'),
 
   // Authentication
   auth: {
-    login: (credentials) => api.post('/auth/login', credentials),
+    login: (credentials) => api.post('/api/auth/login', credentials),
     logout: () => {
       sessionStorage.removeItem('auth-token');
       sessionStorage.removeItem('user-role');
@@ -57,32 +57,24 @@ export const apiService = {
 
   // Workers
   workers: {
-    getAll: () => api.get('/workers'),
-    getById: (id) => api.get(`/workers/${id}`),
-    create: (workerData) => api.post('/workers', workerData),
-    updateStatus: (id, status) => api.put(`/workers/${id}/status`, { status }),
-    updateVerification: (id, verified) => api.put(`/workers/${id}/verification`, { verified }),
+    getAll: () => api.get('/api/workers'),
+    getById: (id) => api.get(/workers/),
+    create: (workerData) => api.post('/api/workers/create', workerData),
+    updateStatus: (id, status) => api.put(/workers//status, { status }),
+    updateVerification: (id, verified) => api.put(/workers//verification, { verified }),
     exportCSV: () => api.get('/workers/export/csv', { responseType: 'blob' })
-  },
-
-  // Statistics
-  statistics: {
-    get: () => api.get('/statistics'),
-    getAnalytics: (period = 'daily') => api.get(`/analytics/${period}`)
   },
 
   // Client requests
   clientRequests: {
     getAll: () => api.get('/client-requests'),
-    create: (requestData) => api.post('/client-requests', requestData),
-    updateStatus: (id, status) => api.put(`/client-requests/${id}/status`, { status })
+    create: (requestData) => api.post('/api/client-requests/create', requestData),
+    updateStatus: (id, status) => api.put(/client-requests//status, { status })
   },
 
-  // Admin
-  admin: {
-    getTables: () => api.get('/admin/tables'),
-    getStats: () => api.get('/admin/stats'),
-    getTableData: (tableName, limit, offset) => api.get(`/admin/table/${tableName}?limit=${limit}&offset=${offset}`)
+  // Contact messages
+  contact: {
+    create: (messageData) => api.post('/api/contact/create', messageData)
   }
 };
 
