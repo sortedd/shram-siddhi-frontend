@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { useNavigation } from '../../components/ui/ContextualNavigation';
 import Button from '../../components/ui/Button';
 import Icon from '../../components/AppIcon';
+import apiService from '../../services/api';
 
 const FranchiseApplication = () => {
     const { language } = useNavigation();
     const [currentSection, setCurrentSection] = useState(1);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
     const [formData, setFormData] = useState({
         // Section 1: Applicant Details
         fullName: '',
@@ -126,10 +129,26 @@ const FranchiseApplication = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Franchise Application Submitted:', formData);
-        // Handle form submission
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        try {
+            // In a real app, you'd upload images first and get URLs
+            // For now, we'll just send the text data
+            const response = await apiService.post('/franchise', formData);
+            console.log('Franchise Application Submitted:', response.data);
+            setSubmitStatus('success');
+            alert(language === 'hi' ? 'आवेदन सफलतापूर्वक जमा किया गया!' : 'Application submitted successfully!');
+            // Reset form or redirect
+        } catch (error) {
+            console.error('Error submitting franchise application:', error);
+            setSubmitStatus('error');
+            alert(language === 'hi' ? 'आवेदन जमा करने में त्रुटि।' : 'Error submitting application.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const renderSection1 = () => (
@@ -858,8 +877,12 @@ const FranchiseApplication = () => {
                                     type="submit"
                                     iconName="Send"
                                     iconPosition="right"
+                                    disabled={isSubmitting}
                                 >
-                                    {language === 'hi' ? 'आवेदन जमा करें' : 'Submit Application'}
+                                    {isSubmitting
+                                        ? (language === 'hi' ? 'जमा हो रहा है...' : 'Submitting...')
+                                        : (language === 'hi' ? 'आवेदन जमा करें' : 'Submit Application')
+                                    }
                                 </Button>
                             )}
                         </div>
