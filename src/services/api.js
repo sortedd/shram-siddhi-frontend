@@ -78,12 +78,28 @@ export const apiService = {
     updateStatus: (id, status) => api.put(`/client-requests/${id}/status`, { status })
   },
 
+  // Contact
+  contact: {
+    create: (data) => api.post('/contact', data)
+  },
+
+  // Franchise
+  franchise: {
+    create: (data) => api.post('/franchise', data)
+  },
+
   // Admin
   admin: {
     getTables: () => api.get('/admin/tables'),
     getStats: () => api.get('/admin/stats'),
     getTableData: (tableName, limit, offset) => api.get(`/admin/table/${tableName}?limit=${limit}&offset=${offset}`)
-  }
+  },
+
+  // Generic methods (for direct usage if needed)
+  get: (url, config) => api.get(url, config),
+  post: (url, data, config) => api.post(url, data, config),
+  put: (url, data, config) => api.put(url, data, config),
+  delete: (url, config) => api.delete(url, config)
 };
 
 // Helper functions for error handling
