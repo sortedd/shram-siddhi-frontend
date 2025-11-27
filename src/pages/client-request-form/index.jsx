@@ -8,6 +8,7 @@ import ProjectRequirementsSection from './components/ProjectRequirementsSection'
 import ContactPreferencesSection from './components/ContactPreferencesSection';
 import SubmitSection from './components/SubmitSection';
 import SuccessModal from './components/SuccessModal';
+import { apiService } from '../../services/api';
 
 const ClientRequestForm = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ const ClientRequestForm = () => {
     city: '',
     state: '',
     pincode: '',
-    
+
     // Project Requirements
     projectName: '',
     projectType: '',
@@ -30,7 +31,7 @@ const ClientRequestForm = () => {
     budget: '',
     projectDescription: '',
     projectLocation: '',
-    
+
     // Contact Preferences
     contactMethod: '',
     urgency: '',
@@ -120,16 +121,16 @@ const ClientRequestForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Generate request ID
-      const newRequestId = generateRequestId();
+      // Real API call
+      const response = await apiService.clientRequests.create(formData);
+
+      // Generate request ID from response or fallback
+      const newRequestId = response.id ? `CR${response.id}` : generateRequestId();
       setRequestId(newRequestId);
-      
+
       // Show success modal
       setShowSuccessModal(true);
-      
+
       // Reset form
       setFormData({
         clientType: '',
@@ -156,68 +157,69 @@ const ClientRequestForm = () => {
         receiveUpdates: false,
         agreeTerms: false
       });
-      
+
     } catch (error) {
       console.error('Form submission error:', error);
       // Handle error (show error message)
+      alert('Failed to submit request. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const isFormValid = () => {
-    return formData?.clientType && 
-           formData?.companyName?.trim() && 
-           formData?.contactPerson?.trim() && 
-           formData?.mobile?.trim() && 
-           formData?.email?.trim() && 
-           formData?.city?.trim() && 
-           formData?.state && 
-           formData?.pincode?.trim() && 
-           formData?.projectName?.trim() && 
-           formData?.projectType && 
-           formData?.workerCount && 
-           formData?.requiredSkills?.length > 0 && 
-           formData?.duration && 
-           formData?.budget && 
-           formData?.projectDescription?.trim() && 
-           formData?.projectLocation?.trim() && 
-           formData?.contactMethod && 
-           formData?.urgency && 
-           formData?.agreeTerms;
+    return formData?.clientType &&
+      formData?.companyName?.trim() &&
+      formData?.contactPerson?.trim() &&
+      formData?.mobile?.trim() &&
+      formData?.email?.trim() &&
+      formData?.city?.trim() &&
+      formData?.state &&
+      formData?.pincode?.trim() &&
+      formData?.projectName?.trim() &&
+      formData?.projectType &&
+      formData?.workerCount &&
+      formData?.requiredSkills?.length > 0 &&
+      formData?.duration &&
+      formData?.budget &&
+      formData?.projectDescription?.trim() &&
+      formData?.projectLocation?.trim() &&
+      formData?.contactMethod &&
+      formData?.urgency &&
+      formData?.agreeTerms;
   };
 
   return (
     <NavigationProvider>
       <div className="min-h-screen bg-background">
         <ContextualNavigation />
-        
+
         <main className="pt-20 pb-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <BreadcrumbTrail />
-            
+
             <FormHeader />
-            
+
             <form onSubmit={(e) => e?.preventDefault()} className="space-y-8">
-              <CompanyDetailsSection 
+              <CompanyDetailsSection
                 formData={formData}
                 setFormData={setFormData}
                 errors={errors}
               />
-              
-              <ProjectRequirementsSection 
+
+              <ProjectRequirementsSection
                 formData={formData}
                 setFormData={setFormData}
                 errors={errors}
               />
-              
-              <ContactPreferencesSection 
+
+              <ContactPreferencesSection
                 formData={formData}
                 setFormData={setFormData}
                 errors={errors}
               />
-              
-              <SubmitSection 
+
+              <SubmitSection
                 onSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
                 isValid={isFormValid()}
@@ -226,7 +228,7 @@ const ClientRequestForm = () => {
           </div>
         </main>
 
-        <SuccessModal 
+        <SuccessModal
           isOpen={showSuccessModal}
           onClose={() => setShowSuccessModal(false)}
           requestId={requestId}
