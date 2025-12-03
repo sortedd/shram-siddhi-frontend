@@ -17,8 +17,6 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-
-
   const handleInputChange = (e) => {
     const { name, value } = e?.target;
     setFormData(prev => ({
@@ -72,8 +70,8 @@ const LoginForm = () => {
       const apiError = handleApiError(error);
       setErrors({
         general: language === 'hi'
-          ? `लॉगिन में त्रुटि: ${apiError.message}\nडिफ़ॉल्ट क्रेडेंशियल्स: admin@shramsiddhi.com / Admin@123`
-          : `Login error: ${apiError.message}\nDefault credentials: admin@shramsiddhi.com / Admin@123`
+          ? `लॉगिन में त्रुटि: ${apiError.message}`
+          : `Login error: ${apiError.message}`
       });
     } finally {
       setIsLoading(false);

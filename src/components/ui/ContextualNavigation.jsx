@@ -136,117 +136,119 @@ const ContextualNavigation = () => {
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-navigation bg-surface/80 backdrop-blur-md border-b border-white/20 shadow-sm"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link to={isAuthenticated ? '/admin-dashboard' : '/homepage'} className="flex items-center space-x-3 group">
-              <motion.div
-                whileHover={{ rotate: 10, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="w-10 h-10 bg-gradient-to-br from-primary to-primary-dark rounded-xl flex items-center justify-center shadow-lg"
-              >
-                <Icon name="Zap" size={24} color="white" />
-              </motion.div>
-              <div className="hidden sm:block">
-                <h1 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors">
-                  {language === 'hi' ? 'श्रम सिद्धि' : 'Shram Siddhi'}
-                </h1>
-                <p className="text-xs font-caption text-muted-foreground">
-                  {language === 'hi' ? 'श्रमिक सशक्तिकरण मंच' : 'Worker Empowerment Platform'}
-                </p>
-              </div>
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {currentNavItems?.map((item) => (
-              <Link
-                key={item?.path}
-                to={item?.path}
-                title={item?.tooltip}
-              >
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-0 left-0 right-0 z-navigation bg-surface/80 backdrop-blur-md border-b border-white/20 shadow-sm"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <Link to={isAuthenticated ? '/admin-dashboard' : '/homepage'} className="flex items-center space-x-3 group">
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`
-                    flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200
-                    ${isActivePath(item?.path)
-                      ? 'bg-primary/10 text-primary shadow-inner border border-primary/20'
-                      : 'text-foreground/80 hover:bg-muted hover:text-primary'
-                    }
-                  `}
+                  whileHover={{ rotate: 10, scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="w-10 h-10 bg-gradient-to-br from-primary to-primary-dark rounded-xl flex items-center justify-center shadow-lg"
                 >
-                  <Icon name={item?.icon} size={18} />
-                  <span>{item?.label}</span>
+                  <Icon name="Zap" size={24} color="white" />
                 </motion.div>
+                <div className="hidden sm:block">
+                  <h1 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors">
+                    {language === 'hi' ? 'श्रम सिद्धि' : 'Shram Siddhi'}
+                  </h1>
+                  <p className="text-xs font-caption text-muted-foreground">
+                    {language === 'hi' ? 'श्रमिक सशक्तिकरण मंच' : 'Worker Empowerment Platform'}
+                  </p>
+                </div>
               </Link>
-            ))}
-          </div>
+            </div>
 
-          {/* Right Side Actions */}
-          <div className="flex items-center space-x-3">
-            {/* Language Toggle */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleLanguageToggle}
-              className="hidden sm:flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground/80 hover:text-primary transition-colors border border-transparent hover:border-border"
-              title={language === 'hi' ? 'Switch to English' : 'हिंदी में बदलें'}
-            >
-              <Icon name="Globe" size={16} />
-              <span className="text-xs font-bold">
-                {language === 'hi' ? 'EN' : 'हि'}
-              </span>
-            </motion.button>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-1">
+              {currentNavItems?.map((item) => (
+                <Link
+                  key={item?.path}
+                  to={item?.path}
+                  title={item?.tooltip}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`
+                      flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200
+                      ${isActivePath(item?.path)
+                        ? 'bg-primary/10 text-primary shadow-inner border border-primary/20'
+                        : 'text-foreground/80 hover:bg-muted hover:text-primary'
+                      }
+                    `}
+                  >
+                    <Icon name={item?.icon} size={18} />
+                    <span>{item?.label}</span>
+                  </motion.div>
+                </Link>
+              ))}
+            </div>
 
-            {/* Admin Login/Logout */}
-            {!isAuthenticated ? (
-              <Link to="/admin-login">
+            {/* Right Side Actions */}
+            <div className="flex items-center space-x-3">
+              {/* Language Toggle */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleLanguageToggle}
+                className="hidden sm:flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-muted/50 hover:bg-muted text-foreground/80 hover:text-primary transition-colors border border-transparent hover:border-border"
+                title={language === 'hi' ? 'Switch to English' : 'हिंदी में बदलें'}
+              >
+                <Icon name="Globe" size={16} />
+                <span className="text-xs font-bold">
+                  {language === 'hi' ? 'EN' : 'हि'}
+                </span>
+              </motion.button>
+
+              {/* Admin Login/Logout */}
+              {!isAuthenticated ? (
+                <Link to="/admin-login">
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button variant="outline" size="sm" className="border-primary/20 hover:border-primary hover:bg-primary/5">
+                      <Icon name="LogIn" size={16} />
+                      <span className="ml-2">
+                        {language === 'hi' ? 'प्रबंधक लॉगिन' : 'Admin Login'}
+                      </span>
+                    </Button>
+                  </motion.div>
+                </Link>
+              ) : (
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button variant="outline" size="sm" className="border-primary/20 hover:border-primary hover:bg-primary/5">
-                    <Icon name="LogIn" size={16} />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleLogout}
+                    className="border-error/20 hover:border-error hover:bg-error/5 text-error"
+                  >
+                    <Icon name="LogOut" size={16} />
                     <span className="ml-2">
-                      {language === 'hi' ? 'प्रबंधक लॉगिन' : 'Admin Login'}
+                      {language === 'hi' ? 'लॉगआउट' : 'Logout'}
                     </span>
                   </Button>
                 </motion.div>
-              </Link>
-            ) : (
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleLogout}
-                  className="border-error/20 hover:border-error hover:bg-error/5 text-error"
-                >
-                  <Icon name="LogOut" size={16} />
-                  <span className="ml-2">
-                    {language === 'hi' ? 'लॉगआउट' : 'Logout'}
-                  </span>
-                </Button>
-              </motion.div>
-            )}
+              )}
 
-            {/* Mobile Menu Button */}
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-muted text-foreground"
-              aria-label="Toggle mobile menu"
-            >
-              <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={24} />
-            </motion.button>
+              {/* Mobile Menu Button */}
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 rounded-lg hover:bg-muted text-foreground"
+                aria-label="Toggle mobile menu"
+              >
+                <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={24} />
+              </motion.button>
+            </div>
           </div>
         </div>
-      </div>
+      </motion.nav>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
@@ -256,7 +258,7 @@ const ContextualNavigation = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="md:hidden fixed inset-0 top-16 z-40 bg-black/50 backdrop-blur-sm"
+              className="md:hidden fixed inset-0 top-16 z-[1050] bg-black/50 backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
@@ -264,7 +266,7 @@ const ContextualNavigation = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="md:hidden fixed top-16 right-0 bottom-0 z-50 w-80 bg-surface border-l border-border shadow-2xl overflow-y-auto"
+              className="md:hidden fixed top-16 right-0 bottom-0 z-mobile-menu w-80 bg-surface border-l border-border shadow-2xl overflow-y-auto"
             >
               <div className="p-6 space-y-6">
                 {/* Mobile Language Toggle */}
@@ -334,7 +336,7 @@ const ContextualNavigation = () => {
           </>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 };
 
