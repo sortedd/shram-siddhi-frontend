@@ -40,7 +40,7 @@ const Footer = () => {
       contact: {
         title: "Contact Information",
         address: "123 Tech Park, Sector 5\nGurgaon, Haryana 122001",
-        phone: "+91 98765 43210",
+        phone: "+91 7648885656",
         email: "support@shramsiddhi.in"
       },
       social: {
@@ -87,7 +87,7 @@ const Footer = () => {
       contact: {
         title: "संपर्क जानकारी",
         address: "123 टेक पार्क, सेक्टर 5\nगुड़गांव, हरियाणा 122001",
-        phone: "+91 98765 43210",
+        phone: "+91 7648885656",
         email: "support@shramsiddhi.in"
       },
       social: {
@@ -126,7 +126,7 @@ const Footer = () => {
             <p className="text-foreground leading-relaxed mb-6">
               {content?.tagline}
             </p>
-            
+
             {/* Social Links */}
             <div>
               <h4 className="font-heading font-semibold text-foreground mb-4">

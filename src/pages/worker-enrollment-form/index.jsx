@@ -29,29 +29,29 @@ const WorkerEnrollmentFormContent = () => {
     fullName: '',
     age: '',
     gender: '',
-    
+
     // Aadhaar Information
     aadhaarNumber: '',
     aadhaarImage: null,
-    
+
     // Contact Information
     mobileNumber: '',
     otp: '',
-    
+
     // Address Information
     address: '',
     city: '',
     state: '',
     pincode: '',
     district: '',
-    
+
     // Skills Information
     skillType: '',
     experience: '',
     dailyWage: '',
     availability: '',
     additionalSkills: '',
-    
+
     // Photo and Location
     photo: null,
     location: null
@@ -75,7 +75,7 @@ const WorkerEnrollmentFormContent = () => {
       ...prev,
       [name]: value
     }));
-    
+
     // Clear error when user starts typing
     if (errors?.[name]) {
       setErrors(prev => ({
@@ -206,10 +206,10 @@ const WorkerEnrollmentFormContent = () => {
     try {
       // Save data using real API
       const savedWorker = await workerDataManager?.saveWorkerData(formData);
-      
+
       if (savedWorker) {
         setSubmitSuccess(true);
-        
+
         // Show success and redirect
         setTimeout(() => {
           navigate('/homepage');
@@ -217,11 +217,11 @@ const WorkerEnrollmentFormContent = () => {
       } else {
         throw new Error('Failed to save worker data');
       }
-      
+
     } catch (error) {
       console.error('Submission error:', error);
       // Add error handling UI if needed
-      alert(language === 'hi' 
+      alert(language === 'hi'
         ? `पंजीकरण में त्रुटि हुई: ${error.message}। कृपया पुनः प्रयास करें।`
         : `Registration error: ${error.message}. Please try again.`
       );
@@ -308,7 +308,7 @@ const WorkerEnrollmentFormContent = () => {
               {language === 'hi' ? 'पंजीकरण सफल!' : 'Registration Successful!'}
             </h1>
             <p className="text-muted-foreground mb-6">
-              {language === 'hi' ?'आपका पंजीकरण सफलतापूर्वक पूरा हो गया है। आपको जल्द ही काम के अवसरों की जानकारी मिलेगी।' :'Your registration has been completed successfully. You will be notified about work opportunities soon.'
+              {language === 'hi' ? 'आपका पंजीकरण सफलतापूर्वक पूरा हो गया है। आपको जल्द ही काम के अवसरों की जानकारी मिलेगी।' : 'Your registration has been completed successfully. You will be notified about work opportunities soon.'
               }
             </p>
             <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
@@ -326,7 +326,7 @@ const WorkerEnrollmentFormContent = () => {
   return (
     <div className="min-h-screen bg-background">
       <ContextualNavigation />
-      
+
       <div className="pt-20 pb-12">
         <div className="max-w-4xl mx-auto px-4">
           {/* Header */}
@@ -335,16 +335,16 @@ const WorkerEnrollmentFormContent = () => {
               {language === 'hi' ? 'श्रमिक पंजीकरण फॉर्म' : 'Worker Enrollment Form'}
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {language === 'hi' ?'श्रम सिद्धि प्लेटफॉर्म पर अपना पंजीकरण कराएं और बेहतर रोजगार के अवसर पाएं' :'Register on Shram Siddhi platform and get access to better employment opportunities'
+              {language === 'hi' ? 'श्रम सिद्धि प्लेटफॉर्म पर अपना पंजीकरण कराएं और बेहतर रोजगार के अवसर पाएं' : 'Register on Shram Siddhi platform and get access to better employment opportunities'
               }
             </p>
           </div>
 
           {/* Progress Indicator */}
-          <FormProgress 
-            currentStep={currentStep} 
-            totalSteps={6} 
-            language={language} 
+          <FormProgress
+            currentStep={currentStep}
+            totalSteps={6}
+            language={language}
           />
 
           {/* Form Content */}
@@ -393,8 +393,8 @@ const WorkerEnrollmentFormContent = () => {
               >
                 <Icon name="Send" size={16} />
                 <span className="ml-2">
-                  {isSubmitting 
-                    ? (language === 'hi' ? 'जमा कर रहे हैं...' : 'Submitting...') 
+                  {isSubmitting
+                    ? (language === 'hi' ? 'जमा कर रहे हैं...' : 'Submitting...')
                     : (language === 'hi' ? 'पंजीकरण पूरा करें' : 'Complete Registration')
                   }
                 </span>
@@ -405,7 +405,7 @@ const WorkerEnrollmentFormContent = () => {
           {/* Help Text */}
           <div className="mt-8 text-center">
             <p className="text-sm text-muted-foreground">
-              {language === 'hi' ?'सहायता चाहिए? हमसे संपर्क करें: +91 98765 43210' :'Need help? Contact us: +91 98765 43210'
+              {language === 'hi' ? 'सहायता चाहिए? हमसे संपर्क करें: +91 7648885656' : 'Need help? Contact us: +91 7648885656'
               }
             </p>
           </div>

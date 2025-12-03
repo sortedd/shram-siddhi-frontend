@@ -227,7 +227,7 @@ const ContactUs = () => {
                                             onChange={handleChange}
                                             required
                                             className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-                                            placeholder="+91 98765 43210"
+                                            placeholder="+91 7648885656"
                                         />
                                     </div>
                                 </div>

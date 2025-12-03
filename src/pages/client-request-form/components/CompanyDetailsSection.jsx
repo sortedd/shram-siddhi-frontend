@@ -8,21 +8,21 @@ const CompanyDetailsSection = ({ formData, setFormData, errors }) => {
   const { language } = useNavigation();
 
   const clientTypeOptions = [
-    { 
-      value: 'individual', 
-      label: language === 'hi' ? 'व्यक्तिगत' : 'Individual' 
+    {
+      value: 'individual',
+      label: language === 'hi' ? 'व्यक्तिगत' : 'Individual'
     },
-    { 
-      value: 'company', 
-      label: language === 'hi' ? 'कंपनी' : 'Company' 
+    {
+      value: 'company',
+      label: language === 'hi' ? 'कंपनी' : 'Company'
     },
-    { 
-      value: 'contractor', 
-      label: language === 'hi' ? 'ठेकेदार' : 'Contractor' 
+    {
+      value: 'contractor',
+      label: language === 'hi' ? 'ठेकेदार' : 'Contractor'
     },
-    { 
-      value: 'government', 
-      label: language === 'hi' ? 'सरकारी संस्था' : 'Government Agency' 
+    {
+      value: 'government',
+      label: language === 'hi' ? 'सरकारी संस्था' : 'Government Agency'
     }
   ];
 
@@ -89,7 +89,7 @@ const CompanyDetailsSection = ({ formData, setFormData, errors }) => {
         <Input
           label={language === 'hi' ? 'मोबाइल नंबर' : 'Mobile Number'}
           type="tel"
-          placeholder={language === 'hi' ? '+91 98765 43210' : '+91 98765 43210'}
+          placeholder={language === 'hi' ? '+91 7648885656' : '+91 7648885656'}
           value={formData?.mobile}
           onChange={(e) => handleInputChange('mobile', e?.target?.value)}
           error={errors?.mobile}

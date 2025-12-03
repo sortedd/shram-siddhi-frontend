@@ -31,10 +31,19 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token expired or invalid
-      sessionStorage.removeItem('auth-token');
-      sessionStorage.removeItem('user-role');
-      window.location.href = '/admin-login';
+      // Define public endpoints that don't require authentication
+      const publicEndpoints = ['/statistics', '/health', '/workers', '/client-requests'];
+      const isPublicEndpoint = publicEndpoints.some(endpoint =>
+        error.config?.url?.includes(endpoint)
+      );
+
+      // Only redirect to login if it's not a public endpoint
+      if (!isPublicEndpoint) {
+        // Token expired or invalid
+        sessionStorage.removeItem('auth-token');
+        sessionStorage.removeItem('user-role');
+        window.location.href = '/admin-login';
+      }
     }
     return Promise.reject(error);
   }

@@ -75,7 +75,7 @@ const ContactPreferencesSection = ({ formData, setFormData, errors }) => {
         <Input
           label={language === 'hi' ? 'वैकल्पिक संपर्क नंबर' : 'Alternative Contact Number'}
           type="tel"
-          placeholder={language === 'hi' ? '+91 98765 43210' : '+91 98765 43210'}
+          placeholder={language === 'hi' ? '+91 7648885656' : '+91 7648885656'}
           value={formData?.alternatePhone}
           onChange={(e) => handleInputChange('alternatePhone', e?.target?.value)}
           error={errors?.alternatePhone}
@@ -88,7 +88,7 @@ const ContactPreferencesSection = ({ formData, setFormData, errors }) => {
           </label>
           <textarea
             className="w-full min-h-[100px] px-4 py-3 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent resize-vertical shadow-neumorphic-sm"
-            placeholder={language === 'hi' ?'कोई विशेष आवश्यकताएं या अतिरिक्त जानकारी...' :'Any special requirements or additional information...'
+            placeholder={language === 'hi' ? 'कोई विशेष आवश्यकताएं या अतिरिक्त जानकारी...' : 'Any special requirements or additional information...'
             }
             value={formData?.specialRequirements}
             onChange={(e) => handleInputChange('specialRequirements', e?.target?.value)}
@@ -98,14 +98,14 @@ const ContactPreferencesSection = ({ formData, setFormData, errors }) => {
 
         <div className="space-y-3">
           <Checkbox
-            label={language === 'hi' ?'मैं श्रम सिद्धि से अपडेट और ऑफर प्राप्त करना चाहता हूं' :'I want to receive updates and offers from Shram Siddhi'
+            label={language === 'hi' ? 'मैं श्रम सिद्धि से अपडेट और ऑफर प्राप्त करना चाहता हूं' : 'I want to receive updates and offers from Shram Siddhi'
             }
             checked={formData?.receiveUpdates}
             onChange={(e) => handleInputChange('receiveUpdates', e?.target?.checked)}
           />
 
           <Checkbox
-            label={language === 'hi' ?'मैं नियम और शर्तों से सहमत हूं' :'I agree to the terms and conditions'
+            label={language === 'hi' ? 'मैं नियम और शर्तों से सहमत हूं' : 'I agree to the terms and conditions'
             }
             checked={formData?.agreeTerms}
             onChange={(e) => handleInputChange('agreeTerms', e?.target?.checked)}
