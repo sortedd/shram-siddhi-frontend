@@ -57,8 +57,28 @@ const Homepage = () => {
   });
 
   const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 500], [0, 140]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 1]); // keep visible
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const containerVariant = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -105,7 +125,9 @@ const Homepage = () => {
           <section className="py-16 md:py-20 px-4 relative">
             <motion.div
               className="max-w-6xl mx-auto"
-              style={{ y: heroY, opacity: heroOpacity }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
             >
               {/* Top Badge Row */}
               <motion.div
@@ -119,12 +141,23 @@ const Homepage = () => {
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Icon name="Sparkles" size={16} className="text-primary" />
-                  <span className="text-xs md:text-sm font-semibold uppercase tracking-[0.15em] text-primary">
+                  <Icon name="Building2" size={16} className="text-primary" />
+                  <span className="text-xs md:text-sm font-semibold uppercase tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
                     {t(
-                      'Project Name: Shram Siddhi Pvt. Ltd.',
-                      'परियोजना: श्रम सिद्धि प्राइवेट लिमिटेड'
+                      'SHRAM LINK WORKFORCE SOLUTION PRIVATE LIMITED',
+                      'श्रम लिंक वर्कफोर्स सॉल्यूशन प्राइवेट लिमिटेड'
                     )}
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center gap-2 bg-surface/80 backdrop-blur-xl border border-accent/30 rounded-full px-4 py-2 shadow-md hover:shadow-lg transition-all"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Icon name="FileBadge" size={16} className="text-accent" />
+                  <span className="text-xs md:text-sm font-semibold uppercase tracking-[0.15em] text-accent">
+                    CIN: U70200MP2025PTC077487
                   </span>
                 </motion.div>
 
@@ -173,7 +206,7 @@ const Homepage = () => {
                   </motion.h1>
 
                   <motion.p
-                    className="text-lg md:text-2xl font-semibold text-foreground mb-4 leading-snug"
+                    className="text-xl md:text-3xl font-bold text-foreground/90 mb-6 leading-snug tracking-tight"
                     initial={{ x: -30, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.35, duration: 0.7 }}
@@ -183,22 +216,6 @@ const Homepage = () => {
                       'हर हाथ को काम, हर परिवार को स्थिरता।'
                     )}
                   </motion.p>
-
-                  <motion.div
-                    className="inline-flex items-center gap-3 bg-surface/90 backdrop-blur-xl border border-accent/40 rounded-2xl px-5 py-3 shadow-lg"
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.5, duration: 0.7 }}
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <Icon name="Quote" size={18} className="text-accent" />
-                    <span className="text-xs md:text-sm font-medium text-foreground">
-                      {t(
-                        'Punch Line: "म से सिद्धि तक" – A journey from मेहनत (hard work) to सफलता (success).',
-                        'पंच लाइन: "म से सिद्धि तक" – मेहनत से सफलता तक की यात्रा।'
-                      )}
-                    </span>
-                  </motion.div>
                 </div>
               </motion.div>
 
@@ -216,22 +233,22 @@ const Homepage = () => {
                   )}
                 </p>
 
-                <div className="flex flex-wrap justify-center gap-3 mt-6">
-                  <span className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-3 py-1.5">
-                    <Icon name="Smartphone" size={16} className="text-primary" />
-                    <span className="text-xs md:text-sm font-medium text-primary">
+                <div className="flex flex-wrap justify-center gap-4 mt-8">
+                  <span className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 hover:bg-primary/20 transition-colors duration-300 cursor-default">
+                    <Icon name="Smartphone" size={18} className="text-primary" />
+                    <span className="text-sm font-semibold text-primary">
                       {t('Web + Mobile', 'वेब + मोबाइल')}
                     </span>
                   </span>
-                  <span className="inline-flex items-center gap-2 bg-secondary/10 border border-secondary/30 rounded-full px-3 py-1.5">
-                    <Icon name="Users2" size={16} className="text-secondary" />
-                    <span className="text-xs md:text-sm font-medium text-secondary">
+                  <span className="inline-flex items-center gap-2 bg-secondary/10 border border-secondary/20 rounded-full px-4 py-2 hover:bg-secondary/20 transition-colors duration-300 cursor-default">
+                    <Icon name="Users2" size={18} className="text-secondary" />
+                    <span className="text-sm font-semibold text-secondary">
                       {t('Multi-Stakeholder', 'बहु-हितधारक')}
                     </span>
                   </span>
-                  <span className="inline-flex items-center gap-2 bg-accent/10 border border-accent/30 rounded-full px-3 py-1.5">
-                    <Icon name="Zap" size={16} className="text-accent" />
-                    <span className="text-xs md:text-sm font-medium text-accent">
+                  <span className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2 hover:bg-accent/20 transition-colors duration-300 cursor-default">
+                    <Icon name="Zap" size={18} className="text-accent" />
+                    <span className="text-sm font-semibold text-accent">
                       {t('Tech-Enabled', 'टेक-समर्थित')}
                     </span>
                   </span>
@@ -240,23 +257,24 @@ const Homepage = () => {
 
               {/* Objective Strip */}
               <motion.div
-                className="max-w-4xl mx-auto mb-14 bg-surface/90 backdrop-blur-xl border border-white/20 rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden"
+                className="max-w-4xl mx-auto mb-14 bg-surface/80 backdrop-blur-2xl border border-white/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden group"
                 initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.8, duration: 0.7 }}
+                whileHover={{ scale: 1.01 }}
               >
-                <div className="absolute -top-16 -right-16 w-32 h-32 bg-primary/15 rounded-full blur-3xl" />
-                <div className="absolute -bottom-16 -left-16 w-32 h-32 bg-secondary/15 rounded-full blur-3xl" />
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/30 transition-colors duration-500" />
+                <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-secondary/20 rounded-full blur-3xl group-hover:bg-secondary/30 transition-colors duration-500" />
 
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-5 relative z-10">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
-                    <Icon name="Target" size={22} className="text-primary-foreground" />
+                <div className="flex flex-col md:flex-row items-start md:items-center gap-6 relative z-10">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg transform group-hover:rotate-6 transition-transform duration-300">
+                    <Icon name="Target" size={28} className="text-primary-foreground" />
                   </div>
-                  <div className="flex-1 space-y-1">
-                    <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] font-semibold text-primary">
+                  <div className="flex-1 space-y-2">
+                    <p className="text-xs uppercase tracking-[0.25em] font-bold text-primary">
                       {t('Core Objective', 'मुख्य उद्देश्य')}
                     </p>
-                    <p className="text-sm md:text-base text-foreground leading-relaxed">
+                    <p className="text-base md:text-lg font-medium text-foreground leading-relaxed">
                       {t(
                         'To take India\'s unorganized workforce towards a digital, organized and self-reliant future through structured labor management and tech-enabled services.',
                         'भारत के असंगठित श्रमिक वर्ग को तकनीक-सक्षम सेवाओं और संरचित श्रम प्रबंधन के माध्यम से डिजिटल, संगठित और आत्मनिर्भर भविष्य की ओर ले जाना।'
@@ -279,7 +297,7 @@ const Homepage = () => {
                   {
                     number: stats.active > 0 ? stats.active : 93,
                     suffix: '%',
-                    label: t('Active Workforce (Target)', 'सक्रित कार्यबल (लक्ष्य)'),
+                    label: t('Active Workforce (Target)', 'सक्रिय कार्यबल (लक्ष्य)'),
                     icon: 'Activity',
                     color: 'text-secondary'
                   },
@@ -300,21 +318,24 @@ const Homepage = () => {
                 ].map((stat, index) => (
                   <motion.div
                     key={index}
-                    className="text-center bg-surface/80 backdrop-blur-md border border-white/15 rounded-2xl p-4 shadow-neumorphic hover:shadow-neumorphic-lg transition-all"
+                    className="text-center bg-surface/60 backdrop-blur-xl border border-white/20 rounded-2xl p-5 shadow-lg hover:shadow-2xl transition-all group relative overflow-hidden"
                     initial={{ y: 40, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.9 + index * 0.08, duration: 0.5 }}
-                    whileHover={{ y: -6 }}
+                    whileHover={{ y: -8, scale: 1.02 }}
                   >
-                    <div className={`mb-2 flex justify-center ${stat.color}`}>
-                      <Icon name={stat.icon} size={24} />
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className={`mb-3 flex justify-center ${stat.color} relative z-10`}>
+                      <div className="p-3 bg-surface/50 rounded-xl shadow-inner">
+                        <Icon name={stat.icon} size={28} />
+                      </div>
                     </div>
                     <div
-                      className={`text-2xl md:text-3xl font-heading font-bold ${stat.color} mb-1`}
+                      className={`text-3xl md:text-4xl font-heading font-extrabold ${stat.color} mb-2 relative z-10 tracking-tight`}
                     >
                       <CountUp end={stat.number} suffix={stat.suffix} />
                     </div>
-                    <div className="text-[11px] md:text-xs font-caption text-muted-foreground font-medium">
+                    <div className="text-xs md:text-sm font-medium text-muted-foreground relative z-10">
                       {stat.label}
                     </div>
                   </motion.div>
@@ -349,7 +370,7 @@ const Homepage = () => {
 
               </div>
 
-              <div className="grid md:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
                   {
                     icon: 'Layers',
@@ -442,16 +463,21 @@ const Homepage = () => {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-7">
+              <motion.div
+                className="grid md:grid-cols-2 gap-7"
+                variants={containerVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
                 {/* Jan Seva Portal */}
                 <motion.div
-                  className="bg-surface/90 backdrop-blur border border-white/20 rounded-3xl p-6 shadow-neumorphic-lg relative overflow-hidden"
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
+                  className="bg-surface/80 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all group relative overflow-hidden"
+                  variants={cardVariant}
+                  whileHover={{ y: -5 }}
                 >
-                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-primary/10 rounded-full blur-3xl" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors duration-500" />
                   <div className="relative space-y-3">
                     <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1 text-[11px] font-semibold text-primary">
                       <Icon name="Users" size={14} />
@@ -460,7 +486,7 @@ const Homepage = () => {
                     <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
                       {t('General Public View', 'सामान्य जनता दृश्य')}
                     </p>
-                    <p className="text-sm text-foreground leading-relaxed">
+                    <p className="text-sm text-foreground leading-relaxed font-medium">
                       {t(
                         'Any citizen can search for workers or services at zero cost and gets connected to verified franchises or local service providers.',
                         'कोई भी नागरिक बिना शुल्क के श्रमिक / सेवाएँ खोज सकता है और सत्यापित फ्रेंचाइज़ या स्थानीय सेवा प्रदाताओं से जुड़ सकता है।'
@@ -468,15 +494,15 @@ const Homepage = () => {
                     </p>
                     <ul className="space-y-2 text-xs text-muted-foreground">
                       <li className="flex gap-2">
-                        <Icon name="CheckCircle2" size={14} />
+                        <Icon name="CheckCircle2" size={14} className="text-primary" />
                         <span>{t('Free search for labor & services.', 'श्रम और सेवाओं के लिए निःशुल्क खोज।')}</span>
                       </li>
                       <li className="flex gap-2">
-                        <Icon name="ShieldCheck" size={14} />
+                        <Icon name="ShieldCheck" size={14} className="text-primary" />
                         <span>{t('Connections only with verified partners.', 'सिर्फ सत्यापित पार्टनर से कनेक्शन।')}</span>
                       </li>
                       <li className="flex gap-2">
-                        <Icon name="SmilePlus" size={14} />
+                        <Icon name="SmilePlus" size={14} className="text-primary" />
                         <span>{t('No platform charges for citizens.', 'सामान्य नागरिकों के लिए कोई शुल्क नहीं।')}</span>
                       </li>
                     </ul>
@@ -485,13 +511,12 @@ const Homepage = () => {
 
                 {/* Agent Login */}
                 <motion.div
-                  className="bg-surface/90 backdrop-blur border border-white/20 rounded-3xl p-6 shadow-neumorphic-lg relative overflow-hidden"
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.18 }}
+                  className="bg-surface/80 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all group relative overflow-hidden"
+                  variants={cardVariant}
+                  whileHover={{ y: -5 }}
                 >
-                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-secondary/10 rounded-full blur-3xl" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-colors duration-500" />
                   <div className="relative space-y-3">
                     <div className="inline-flex items-center gap-2 bg-secondary/10 rounded-full px-3 py-1 text-[11px] font-semibold text-secondary">
                       <Icon name="IdCard" size={14} />
@@ -500,7 +525,7 @@ const Homepage = () => {
                     <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
                       {t('Contractors • Shop Owners • Transporters', 'कॉन्ट्रैक्टर • दुकानदार • ट्रांसपोर्टर्स')}
                     </p>
-                    <p className="text-sm text-foreground leading-relaxed">
+                    <p className="text-sm text-foreground leading-relaxed font-medium">
                       {t(
                         'For contractors and businesses employing workers on daily or monthly wages, with digital tools to manage the entire worker lifecycle.',
                         'उन कॉन्ट्रैक्टरों और व्यवसायों के लिए जो श्रमिकों को दैनिक / मासिक मजदूरी पर रखते हैं और पूरे वर्कर लाइफसाइकिल को डिजिटल तरीके से मैनेज करना चाहते हैं।'
@@ -508,7 +533,7 @@ const Homepage = () => {
                     </p>
                     <ul className="space-y-2 text-xs text-muted-foreground">
                       <li className="flex gap-2">
-                        <Icon name="QrCode" size={14} />
+                        <Icon name="QrCode" size={14} className="text-secondary" />
                         <span>
                           {t(
                             'QR-based worker IDs linked with Aadhaar & bank account.',
@@ -517,7 +542,7 @@ const Homepage = () => {
                         </span>
                       </li>
                       <li className="flex gap-2">
-                        <Icon name="Clock4" size={14} />
+                        <Icon name="Clock4" size={14} className="text-secondary" />
                         <span>
                           {t(
                             'Payroll, attendance & performance records.',
@@ -526,11 +551,11 @@ const Homepage = () => {
                         </span>
                       </li>
                       <li className="flex gap-2">
-                        <Icon name="MapPin" size={14} />
+                        <Icon name="MapPin" size={14} className="text-secondary" />
                         <span>{t('GPS tracking & daily work logs.', 'GPS ट्रैकिंग और दैनिक कार्य लॉग।')}</span>
                       </li>
                       <li className="flex gap-2">
-                        <Icon name="CreditCard" size={14} />
+                        <Icon name="CreditCard" size={14} className="text-secondary" />
                         <span>
                           {t(
                             'Affordable SaaS subscription: monthly / annual plans.',
@@ -539,7 +564,7 @@ const Homepage = () => {
                         </span>
                       </li>
                     </ul>
-                    <p className="text-[11px] text-muted-foreground mt-2">
+                    <p className="text-[11px] text-muted-foreground mt-2 italic">
                       {t(
                         'Illustrative slabs: ₹99, ₹149, ₹199 – configurable as per category & number of employees.',
                         'उदाहरण स्लैब: ₹99, ₹149, ₹199 – श्रेणी और कर्मचारियों की संख्या के अनुसार।'
@@ -550,13 +575,12 @@ const Homepage = () => {
 
                 {/* Franchise Login */}
                 <motion.div
-                  className="bg-surface/90 backdrop-blur border border-white/20 rounded-3xl p-6 shadow-neumorphic-lg relative overflow-hidden"
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.26 }}
+                  className="bg-surface/80 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all group relative overflow-hidden"
+                  variants={cardVariant}
+                  whileHover={{ y: -5 }}
                 >
-                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-accent/10 rounded-full blur-3xl" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/20 transition-colors duration-500" />
                   <div className="relative space-y-3">
                     <div className="inline-flex items-center gap-2 bg-accent/10 rounded-full px-3 py-1 text-[11px] font-semibold text-accent">
                       <Icon name="Handshake" size={14} />
@@ -565,7 +589,7 @@ const Homepage = () => {
                     <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
                       {t('Authorized Franchise Partners', 'अधिकृत फ्रेंचाइज़ पार्टनर')}
                     </p>
-                    <p className="text-sm text-foreground leading-relaxed">
+                    <p className="text-sm text-foreground leading-relaxed font-medium">
                       {t(
                         'Local partners who onboard workers, serve B2B clients and manage large construction or project-based manpower.',
                         'स्थानीय पार्टनर जो श्रमिकों को ऑनबोर्ड करते हैं, B2B क्लाइंट्स को सेवाएँ देते हैं और बड़े कंस्ट्रक्शन या प्रोजेक्ट-आधारित मैनपावर प्रोजेक्ट संभालते हैं।'
@@ -573,15 +597,15 @@ const Homepage = () => {
                     </p>
                     <ul className="space-y-2 text-xs text-muted-foreground">
                       <li className="flex gap-2">
-                        <Icon name="UserCog" size={14} />
+                        <Icon name="UserCog" size={14} className="text-accent" />
                         <span>{t('Full access to agent features plus project tools.', 'एजेंट की सभी सुविधाएँ + प्रोजेक्ट टूल्स।')}</span>
                       </li>
                       <li className="flex gap-2">
-                        <Icon name="BadgeIndianRupee" size={14} />
+                        <Icon name="BadgeIndianRupee" size={14} className="text-accent" />
                         <span>{t('Entry fee, recurring SaaS fee & incentives.', 'एंट्री फीस, मासिक SaaS फीस और इंसेंटिव।')}</span>
                       </li>
                       <li className="flex gap-2">
-                        <Icon name="Building" size={14} />
+                        <Icon name="Building" size={14} className="text-accent" />
                         <span>
                           {t(
                             'Construction, industrial and large manpower deployment.',
@@ -590,7 +614,7 @@ const Homepage = () => {
                         </span>
                       </li>
                     </ul>
-                    <p className="text-[11px] text-muted-foreground mt-2">
+                    <p className="text-[11px] text-muted-foreground mt-2 italic">
                       {t(
                         'Illustrative entry fee: ₹10,000 to ₹99,000 based on brand value; platform + service fee approx. ₹999/month.',
                         'उदाहरण एंट्री फीस: ₹10,000 से ₹99,000 (ब्रांड वैल्यू पर निर्भर); प्लेटफॉर्म + सर्विस चार्ज ~₹999/माह।'
@@ -601,13 +625,12 @@ const Homepage = () => {
 
                 {/* Company Master Login */}
                 <motion.div
-                  className="bg-surface/90 backdrop-blur border border-white/20 rounded-3xl p-6 shadow-neumorphic-lg relative overflow-hidden"
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.34 }}
+                  className="bg-surface/80 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all group relative overflow-hidden"
+                  variants={cardVariant}
+                  whileHover={{ y: -5 }}
                 >
-                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-success/10 rounded-full blur-3xl" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-success/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-success/10 rounded-full blur-3xl group-hover:bg-success/20 transition-colors duration-500" />
                   <div className="relative space-y-3">
                     <div className="inline-flex items-center gap-2 bg-success/10 rounded-full px-3 py-1 text-[11px] font-semibold text-success">
                       <Icon name="Shield" size={14} />
@@ -616,7 +639,7 @@ const Homepage = () => {
                     <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
                       {t('Central Control & Governance', 'केंद्रीय नियंत्रण और गवर्नेंस')}
                     </p>
-                    <p className="text-sm text-foreground leading-relaxed">
+                    <p className="text-sm text-foreground leading-relaxed font-medium">
                       {t(
                         'Admin layer to manage the platform, approve workers, monitor franchises, assign leads and track payments & compliance.',
                         'एडमिन लेयर जो प्लेटफॉर्म मैनेजमेंट, वर्कर अप्रूवल, फ्रेंचाइज़ मॉनिटरिंग, लीड असाइनमेंट और पेमेंट/कम्प्लायंस ट्रैक करती है।'
@@ -624,7 +647,7 @@ const Homepage = () => {
                     </p>
                     <ul className="space-y-2 text-xs text-muted-foreground">
                       <li className="flex gap-2">
-                        <Icon name="ListChecks" size={14} />
+                        <Icon name="ListChecks" size={14} className="text-success" />
                         <span>
                           {t(
                             'Approve/reject worker registrations & franchise activities.',
@@ -633,17 +656,17 @@ const Homepage = () => {
                         </span>
                       </li>
                       <li className="flex gap-2">
-                        <Icon name="Bell" size={14} />
+                        <Icon name="Bell" size={14} className="text-success" />
                         <span>{t('Broadcast messages & manage dropdown masters.', 'ब्रॉडकास्ट मैसेज और ड्रॉपडाउन मास्टर कंट्रोल।')}</span>
                       </li>
                       <li className="flex gap-2">
-                        <Icon name="Percent" size={14} />
+                        <Icon name="Percent" size={14} className="text-success" />
                         <span>{t('Configure incentive percentages & company share.', 'इंसेंटिव प्रतिशत और कंपनी कट सेटिंग।')}</span>
                       </li>
                     </ul>
                   </div>
                 </motion.div>
-              </div>
+              </motion.div>
             </div>
           </motion.section>
 
@@ -671,7 +694,7 @@ const Homepage = () => {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-5 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                 {[
                   {
                     icon: 'Repeat',
